@@ -1,0 +1,2 @@
+ Devo far in modo che il cliente possa selezionare gli ingredienti e comporre il proprio dolce:
+ Inizialmente creo le liste degli ingredienti, poi creo l'arrayList che conterrà le scelte del cliente, successivamente prendo tutte le scelte del cliente e le inserisco nell'arrayList, anche in modo random; infine compongo il messaggio per il cliente con tutti i suoi ingredienti.
