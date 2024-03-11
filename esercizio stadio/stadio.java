@@ -46,4 +46,5 @@ public class stadio {
         System.out.println("Spettatori per weekend: " + spettatoriWeekend);
 
     }
+
 }
