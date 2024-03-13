@@ -1,0 +1,3 @@
+class Tablet extends DispositivoElettronico {
+
+}
