@@ -12,6 +12,14 @@ class Tablet extends DispositivoElettronico {
         idUtente++;
     }
 
+    public int getPuntiUtente() {
+        return puntiUtente;
+    }
+
+    public int getIdUtente() {
+        return idUtente;
+    }
+
     // aggiungo il metodo tablet dentro ad avviaApplicazione
     @Override
     public void avviaApplicazione(String nomeApp) {

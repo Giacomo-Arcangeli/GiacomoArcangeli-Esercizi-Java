@@ -12,6 +12,14 @@ class Smartphone extends DispositivoElettronico {
         System.out.println("Username: " + username + ", Password: " + password);
     }
 
+    public String getUsername() {
+        return usernameUtente;
+    }
+
+    public String getPassword() {
+        return passwordUtente;
+    }
+
     // aggiungo il metodo login dentro ad avviaApplicazione
     @Override
     public void avviaApplicazione(String nomeApp) {
