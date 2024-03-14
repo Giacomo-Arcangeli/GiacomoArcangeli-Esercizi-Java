@@ -5,6 +5,7 @@ public class ResocontoDigitale {
         Smartphone smartphone = new Smartphone();
         Tablet tablet = new Tablet();
         smartphone.avviaApplicazione("Facebook");
+        tablet.avviaApplicazione("Facebook");
         System.out.println("Resoconto Digitale:");
         System.out.println("Username: " + smartphone.getUsername());
         System.out.println("Password: " + smartphone.getPassword());

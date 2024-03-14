@@ -3,36 +3,32 @@ import java.util.Random;
 class Tablet extends DispositivoElettronico {
 
     public int puntiUtente;
-    public int idUtente = 1;
+    public int idUtente;
 
-    // scrivo il metodo tablet
-    private void tablet() {
-        Random random = new Random();
-        puntiUtente = random.nextInt(100) + 1;
-        idUtente++;
+    public Tablet(int idUtente) {
+        this.idUtente = idUtente;
     }
 
-    public int getPuntiUtente() {
-        return puntiUtente;
+    private void puntiUtente() {
+        Random random = new Random();
+        puntiUtente = random.nextInt(100) + 1;
     }
 
     public int getIdUtente() {
         return idUtente;
     }
 
-    // aggiungo il metodo tablet dentro ad avviaApplicazione
+    public int getPuntiUtente() {
+        return puntiUtente;
+    }
+
     @Override
     public void avviaApplicazione(String nomeApp) {
         super.avviaApplicazione(nomeApp);
-        tablet();
+        puntiUtente();
         System.out.println("ID Utente: " + idUtente);
         System.out.println("Punti Utente: " + puntiUtente);
+        idUtente++;
     }
 
-    // prova
-
-    // public static void main(String[] args) {
-    // Tablet tablet = new Tablet();
-    // tablet.avviaApplicazione("facebook");
-    // }
 }
