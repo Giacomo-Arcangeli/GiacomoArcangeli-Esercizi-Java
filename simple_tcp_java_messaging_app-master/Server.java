@@ -35,10 +35,12 @@ public class Server {
     private static class ClientHandler extends Thread {
         private Socket clientSocket; // Socket del client.
         private PrintWriter out; // PrintWriter per inviare dati al client.
+        private String username;
 
         // Costruttore che accetta il socket del client.
-        public ClientHandler(Socket socket) {
+        public ClientHandler(Socket socket) throws IOException {
             this.clientSocket = socket;
+            this.out = new PrintWriter(clientSocket.getOutputStream(), true);
         }
 
         // Metodo run eseguito quando il thread è avviato.
@@ -49,11 +51,15 @@ public class Server {
                 out = new PrintWriter(clientSocket.getOutputStream(), true); // PrintWriter per inviare dati al client,
                                                                              // con auto-flush
                 clientWriters.add(out); // Aggiunge il PrintWriter all'insieme di client.
+
+                // modo per far vedere l'ip pubblico degli utenti
+                broadcast(" si è connesso dall'IP: " + clientSocket.getInetAddress().getHostAddress());
                 while (true) { // Ciclo infinito per leggere i messaggi in entrata.
                     String message = in.nextLine(); // Legge la prossima riga di testo inviata dal client.
                     if (message.equalsIgnoreCase("exit")) { // Se il messaggio è "exit", termina il ciclo.
                         break;
                     }
+
                     activeUsers();
                     broadcast(message); // Invia il messaggio ricevuto a tutti i client connessi.
                 }
@@ -79,12 +85,6 @@ public class Server {
             // inserisco i messaggi in un file.txt
             try (PrintWriter file = new PrintWriter(new FileWriter("chat.txt", true))) {
                 file.println(message);
-                if (clientWriters.equals(0)) {
-                    File file2 = new File("chat.txt");
-                    if (message.equalsIgnoreCase("exit")) {
-                        file2.delete();
-                    }
-                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
