@@ -52,19 +52,13 @@ public class Server {
                 out = new PrintWriter(clientSocket.getOutputStream(), true); // PrintWriter per inviare dati al client,
                 // con auto-flush.
 
-                // *************** FUNZIONALITA' 1 ********
-                String username = in.nextLine();
-                String clientIpAddress = clientSocket.getInetAddress().getHostAddress();
-
-                broadcast("L'utente " + username + " si è appena connesso dall'IP "
-                        + clientIpAddress);
-                // ***************
-
                 clientWriters.add(out); // Aggiunge il PrintWriter all'insieme di client.
 
                 while (true) { // Ciclo infinito per leggere i messaggi in entrata.
                     String message = in.nextLine(); // Legge la prossima riga di testo inviata dal client.
-                    if (message.equalsIgnoreCase("exit")) { // Se il messaggio è "exit", termina il ciclo.
+                    if (message.equalsIgnoreCase("exit")) {
+
+                        // Se il messaggio è "exit", termina il ciclo.
                         break;
                     }
                     broadcast(message); // Invia il messaggio ricevuto a tutti i client connessi.

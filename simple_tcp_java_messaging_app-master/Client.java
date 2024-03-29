@@ -2,6 +2,7 @@
 // Importazione delle classi necessarie per I/O e networking.
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class Client {
                 Scanner userInput = new Scanner(System.in); // Scanner per leggere l'input dell'utente da console.
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) { // PrintWriter per inviare messaggi
                                                                                      // al server, con auto-flush
-                                                                                     // attivato.
+            // attivato.
 
             // Messaggio che indica la connessione riuscita al server.
             System.out.println("Connected to server. Start typing messages (type 'exit' to quit).");
@@ -46,6 +47,10 @@ public class Client {
                 }
             });
             serverListener.start(); // Avvia il thread che ascolta i messaggi dal server.
+
+            // FUNZIONALITA' 1
+            out.println(
+                    username + " è entrato in chat con l'indirizzo IP: " + InetAddress.getLocalHost().getHostAddress());
 
             // Ciclo principale per l'invio di messaggi al server.
             while (true) {
