@@ -1,6 +1,8 @@
 
 // Importazione delle classi necessarie per I/O e networking.
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -18,7 +20,6 @@ public class Client {
             System.err.println("Usage: java Client <server-ip> <port> <username>");
             System.exit(1);
         }
-
         // Estrazione degli argomenti: IP del server, porta e username.
         String serverIp = args[0]; // IP del server.
         int port = Integer.parseInt(args[1]); // Porta di connessione al server, convertita in un intero.
@@ -30,11 +31,10 @@ public class Client {
                 Scanner userInput = new Scanner(System.in); // Scanner per leggere l'input dell'utente da console.
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) { // PrintWriter per inviare messaggi
                                                                                      // al server, con auto-flush
-            // attivato.
-
+                                                                                     // attivato.
             // Messaggio che indica la connessione riuscita al server.
             System.out.println("Connected to server. Start typing messages (type 'exit' to quit).");
-
+            // Stampo il nome e l'ip di chi si è connesso
             // Creazione e avvio di un nuovo thread per ascoltare i messaggi dal server.
             Thread serverListener = new Thread(() -> {
                 try (Scanner in = new Scanner(socket.getInputStream())) { // Scanner per leggere i messaggi in entrata
@@ -48,9 +48,7 @@ public class Client {
             });
             serverListener.start(); // Avvia il thread che ascolta i messaggi dal server.
 
-            // FUNZIONALITA' 1
-            out.println(
-                    username + " è entrato in chat con l'indirizzo IP: " + InetAddress.getLocalHost().getHostAddress());
+            out.println(username + " si è connesso dall'IP " + InetAddress.getLocalHost().getHostAddress());
 
             // Ciclo principale per l'invio di messaggi al server.
             while (true) {
